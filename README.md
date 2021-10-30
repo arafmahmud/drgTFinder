@@ -30,7 +30,7 @@ optional arguments:
 ```
 usage: drgTFinder.py [-h] --sequence SEQUENCE --type TYPE [--length LENGTH] [--cutoff CUTOFF] [--localization LOCALIZATION] --output OUTPUT
 
-drgTFinder is an automated pipeline for detecting Novel drug targets using proteome sequence from 
+drgTFinder is an automated pipeline for detecting Novel drug targets using proteome sequence of bacteria
 
 optional arguments:
   -h, --help            show this help message and exit
