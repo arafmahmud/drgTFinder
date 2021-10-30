@@ -10,7 +10,7 @@ NCBI BLAST+ installed via `sudo apt-get install ncbi-blast+-legacy`
 Psortb installed from https://hub.docker.com/r/brinkmanlab/psortb
 
 # Make Database
-`
+``
 usage: make_db.py [-h] --bacteria BACTERIA --host HOST --DEG DEG
 
 make database for the drgTFinder  
@@ -25,9 +25,9 @@ optional arguments:
 
     Examples:
     python3 make.py -b eco -h GRCH38.fasta -d DEG.fasta
-`
+``
 # Use drgTFinder:
-`
+``
 usage: drgTFinder.py [-h] --sequence SEQUENCE --type TYPE [--length LENGTH] [--cutoff CUTOFF] [--localization LOCALIZATION] --output OUTPUT
 
 drgTFinder is an automated pipeline for detecting Novel drug targets using proteome sequence from 
@@ -50,4 +50,4 @@ optional arguments:
     Examples:
     python3 drgTFinder.py -s whole_proteome.fasta -o outputdir -t n
 
-`
+``
