@@ -1,7 +1,7 @@
 # drgTFinder
-Drug Target finder from bacterial whole proteome
+drgTFinder in a automated tool for finding Drug Targets from bacterial whole proteome sequence.
 
-Prerequisites:
+# Prerequisites:
 
 Python libraries pandas,biopython are reuired installed via `pip3 install pandas biopython`
 
