@@ -7,6 +7,8 @@ Python libraries pandas,biopython are reuired installed via `pip3 install pandas
 
 NCBI BLAST+ installed via `sudo apt-get install ncbi-blast+-legacy`
 
+Seqtk instaled via `sudo apt-get install seqtk`
+
 Psortb installed from https://hub.docker.com/r/brinkmanlab/psortb
 ```
 wget https://raw.githubusercontent.com/brinkmanlab/psortb_commandline_docker/master/psortb
