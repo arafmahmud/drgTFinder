@@ -28,8 +28,8 @@ with open("database/human_pathway.csv", "w") as f1:
     for j in hm:
         f1.write(j)
 df2 = pd.read_csv("database/human_pathway.csv", sep = "\t", names = ["Accession", "Pathway"])
-
-gene_list = REST.kegg_list("bmf").read() #.format()
+organism = args.bacteria
+gene_list = REST.kegg_list(organism).read() #.format()
 with open("database/gene_list.csv", "w") as f:
     f.write(gene_list)
     
