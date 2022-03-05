@@ -122,7 +122,7 @@ with open('temp/non_human.fasta', 'w') as target:
 
 ###blast of processed sequences with the kegg database 
 print("blast with kegg")
-blast_kegg_database = "blastp -query temp/{}_non_redundant.fasta -db database/kegg -out temp/query_kegg.csv -outfmt '6 qseqid qacc qlen sseqid sacc slen qstart qend sstart send evalue bitscore length qcovs pident'  -evalue 1e-100 -max_target_seqs 1 > /dev/null".format(file_input)
+blast_kegg_database = "blastp -query temp/non_human.fasta -db database/kegg -out temp/query_kegg.csv -outfmt '6 qseqid qacc qlen sseqid sacc slen qstart qend sstart send evalue bitscore length qcovs pident'  -evalue 1e-100 -max_target_seqs 1 > /dev/null".format(file_input)
 os.system(blast_kegg_database)
 #df_kegg = pd.read_csv("temp/query_kegg.csv", sep = "\t", names = ['query' , 'subject', 'identity', "Alignment lenth", "mismatches", "gap opens", "qstart", "qend", "s start", "s end", "evalue", "bitscore"])
 df_kegg = pd.read_csv("temp/query_kegg.csv", sep = "\t", names = ["qseqid", "qlen", "sseqid", "sacc", "slen", "qstart", "qend", "sstart", "send", "evalue", "bitscore", "length", "qcovs", "pident "] )
@@ -144,7 +144,7 @@ os.system("mkdir temp/psortb > /dev/null")
 psortb = "./psortb -{} -r temp/psortb -i temp/kegg_hit.fasta".format(bac_type)
 os.system(psortb)
 os.system("mv temp/psortb/*.txt temp/psortb/psortb_results.txt")
-os.system("mkdir results > /dev/null")
+
 
 f = open("temp/psortb/psortb_results.txt", 'r')
 rr = f.read()
@@ -168,7 +168,7 @@ for i in location:
 #print(loc)
 df_loc["Localization"] = pd.Series(loc)
 #print(loc)
-print(df_loc)
+#print(df_loc)
 df_loc.to_csv('temp/localization.csv')
 
 
@@ -176,7 +176,15 @@ df_loc = df_loc[df_loc.Localization == "CytoplasmicMembrane"]
 df_loc = df_loc['Protein']
 df_loc.to_csv('temp/selected_proteins.list', index = False, header = False)
 
-print(df_loc)
+denoise = open("temp/selected_proteins.list", 'r')
+den = denoise.read()
+den = den.replace('''"''', "")
+with open("temp/selected_proteins.list", "w") as wrt:
+    for idss in den:
+        wrt.write(idss)
+
+
+#print(df_loc)
 seqtk4 = "seqtk subseq {}.fasta temp/selected_proteins.list > {}/selected_proteins.fasta".format(file_input,args.output)
 os.system(seqtk4)
 
@@ -188,6 +196,5 @@ os.system(seqtk4)
 # Go pipeline, go!!!
 #if __name__ == "__main__":
 #    main()
-
 
 
