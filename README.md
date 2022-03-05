@@ -9,6 +9,9 @@ NCBI BLAST+ installed via `sudo apt-get install ncbi-blast+-legacy`
 
 Psortb installed from https://hub.docker.com/r/brinkmanlab/psortb
 
+```wget https://raw.githubusercontent.com/brinkmanlab/psortb_commandline_docker/master/psortb
+chmod +x psortb```
+
 # Make Database
 ```
 usage: make_db.py [-h] --bacteria BACTERIA --host HOST --DEG DEG
