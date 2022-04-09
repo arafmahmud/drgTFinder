@@ -29,7 +29,7 @@ optional arguments:
   --DEG DEG, -d DEG     DEG database fasta file found in http://tubic.tju.edu.cn/deg/download.php
 
     Examples:
-    python3 make.py -b eco -h GRCH38.fasta -d DEG.fasta
+    python3 make_db.py -b cvi -h GRCH38.fasta -d DEG.fasta
 ```
 # Use drgTFinder:
 ```
