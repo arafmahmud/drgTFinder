@@ -13,7 +13,7 @@ import argparse
 parser = argparse.ArgumentParser(prog="make_db.py", formatter_class=argparse.RawTextHelpFormatter, description="""
 make database for the drgTFinder  \n""",epilog="""
     Examples:
-    python3 make.py -b eco -h GRCH38.fasta -d DEG.fasta\n""")
+    python3 make_db.py -b cvi -h GRCH38.fasta -d DEG.fasta\n""")
 parser.add_argument('--bacteria', '-b', type=str, default="", required=True, help='Three or four letter code for the query organism found in https://www.genome.jp/kegg-bin/find_org_www?mode=abbr&obj=show.org')
 parser.add_argument('--host', '-hs', type=str, default="", required=True, help='Host whole proteome as fasta file found in https://www.uniprot.org/proteomes/UP000005640')
 parser.add_argument('--DEG', '-d', type=str, default="", required=True, help='DEG database fasta file found in http://tubic.tju.edu.cn/deg/download.php')
