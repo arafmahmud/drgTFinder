@@ -44,7 +44,7 @@ if args.output == "":
 
 os.system('mkdir temp > /dev/null')
 # In[4]:
-
+os.system("rm -r temp/psortb")
 
 ###Removal of Shorter Sequences
 print("Removing shorter sequences")
@@ -171,6 +171,7 @@ df_loc["Localization"] = pd.Series(loc)
 #print(df_loc)
 df_loc.to_csv('temp/localization.csv')
 
+os.system("rm -r temp/psortb")
 
 df_loc = df_loc[df_loc.Localization == "CytoplasmicMembrane"]
 df_loc = df_loc['Protein']
@@ -186,8 +187,9 @@ with open("temp/selected_proteins.list", "w") as wrt:
 
 #print(df_loc)
 seqtk4 = "seqtk subseq {}.fasta temp/selected_proteins.list > {}/selected_proteins.fasta".format(file_input,args.output)
+protein_targets = "cp temp/selected_proteins.list {}/selected_proteins.txt".format(args.output)
 os.system(seqtk4)
-
+os.system(protein_targets)
 
 
 
