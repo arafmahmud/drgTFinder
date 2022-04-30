@@ -173,7 +173,7 @@ df_loc.to_csv('temp/localization.csv')
 
 os.system("rm -r temp/psortb")
 
-df_loc = df_loc[df_loc.Localization == "CytoplasmicMembrane"]
+df_loc = df_loc[df_loc.Localization == args.localization]
 df_loc = df_loc['Protein']
 df_loc.to_csv('temp/selected_proteins.list', index = False, header = False)
 
