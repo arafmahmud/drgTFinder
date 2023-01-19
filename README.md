@@ -3,20 +3,21 @@ drgTFinder in a automated tool for finding Drug Targets from bacterial whole pro
 
 # Prerequisites:
 
-Python libraries pandas,biopython are reuired installed via `pip3 install pandas biopython`
-
-NCBI BLAST+ installed via `sudo apt-get install ncbi-blast+-legacy`
-
-Seqtk instaled via `sudo apt-get install seqtk`
-
-Psortb installed from https://hub.docker.com/r/brinkmanlab/psortb
+Create a new conda environment and install dependencies:
 ```
-wget https://raw.githubusercontent.com/brinkmanlab/psortb_commandline_docker/master/psortb
-chmod +x psortb
+conda create --name drgTFinder 
+conda activate drgTFinder
+conda install -c bioconda -y blast
+conda install -c bioconda -y seqtk
+pip3 install biopython
+pip3 install pandas
+
 ```
+
 # Make Database
 ```
-usage: make_db.py [-h] --bacteria BACTERIA --host HOST --DEG DEG
+make_db.py [-h] --bacteria BACTERIA --host HOST --DEG DEG
+                  [--database DATABASE] [--threads THREADS]
 
 make database for the drgTFinder  
 
@@ -27,32 +28,38 @@ optional arguments:
   --host HOST, -hs HOST
                         Host whole proteome as fasta file found in https://www.uniprot.org/proteomes/UP000005640
   --DEG DEG, -d DEG     DEG database fasta file found in http://tubic.tju.edu.cn/deg/download.php
+  --database DATABASE, -db DATABASE
+                        Database directory
+  --threads THREADS, -t THREADS
+                        Number of threads
 
     Examples:
-    python3 make_db.py -b cvi -h GRCH38.fasta -d DEG.fasta
+    python3 make_db.py -b cvi -hs GRCH38.fasta -d DEG.fasta -t 8 -db database 
 ```
 # Use drgTFinder:
 ```
-usage: drgTFinder.py [-h] --sequence SEQUENCE --type TYPE [--length LENGTH] [--cutoff CUTOFF] [--localization LOCALIZATION] --output OUTPUT
+usage: drgTFinder.py [-h] --sequence SEQUENCE [--length LENGTH]
+                     [--cutoff CUTOFF] [--output OUTPUT] [--database DATABASE]
+                     [--threads THREADS]
 
-drgTFinder is an automated pipeline for detecting Novel drug targets using proteome sequence of bacteria
+drgTFinder is an automated pipeline for detecting Novel drug targets using proteome sequence from 
 
 optional arguments:
   -h, --help            show this help message and exit
   --sequence SEQUENCE, -s SEQUENCE
                         Whole proteome sequence file in FASTA format.
-  --type TYPE, -t TYPE  Bacteria type(p or n) 
   --length LENGTH, -l LENGTH
                         Sequence Lenth cutoff (default = 100)
   --cutoff CUTOFF, -c CUTOFF
                         CD-Hit cutoff value (default = 0.8)
-  --localization LOCALIZATION, -loc LOCALIZATION
-                        Subcellular localization (Cytoplasmic, Extracellular, Cellwall, CytoplasmicMembrane)
-                        default = CytoplasmicMembrane
   --output OUTPUT, -o OUTPUT
                         Output directory
+  --database DATABASE, -db DATABASE
+                        Database directory
+  --threads THREADS, -t THREADS
+                        Number of threads
 
     Examples:
-    python3 drgTFinder.py -s whole_proteome.fasta -o outputdir -t n
+    python3 drgTFinder.py -db database -s test.fasta -o output -t 4
 
 ```
